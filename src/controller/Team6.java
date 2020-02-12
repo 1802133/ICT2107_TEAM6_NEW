@@ -199,15 +199,15 @@ public class Team6 extends JFrame {
 		
 		
 		// Initializing other class
-		Listener l = new Listener(multicastSocket, multicastGroup, userId);
-		addGroup aG = new addGroup();
-		joinGroup jG = new joinGroup();
-		registerUser rU = new registerUser();
-		editOption eO = new editOption();
-		profilePage pO = new profilePage();
-		deleteGroup dG = new deleteGroup();
-		json jSON = new json();
-		msgGroup mG = new msgGroup();
+//		Listener l = new Listener(multicastSocket, multicastGroup, userId);
+//		addGroup aG = new addGroup();
+//		joinGroup jG = new joinGroup();
+//		registerUser rU = new registerUser();
+//		editOption eO = new editOption();
+//		profilePage pO = new profilePage();
+//		deleteGroup dG = new deleteGroup();
+//		json jSON = new json();
+//		msgGroup mG = new msgGroup();
 		
 //		groupList.setListData(l.userGrp.values().toArray((new String[l.userGrp.values().size()])));
 		// Initialize size of JList groups and user respectively
@@ -254,15 +254,15 @@ public class Team6 extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				String msg = txtSend.getText();
-				ip = l.nameIP.get(activeGrp);
-				if(grpSelected == false) {
-					System.out.println("no group selected");
-				}
-				else {	
-					txtSend.setText("");
-					mG.msg(multicastSocket,multicastGroup,ip,activeGrp,userId,msg);					
-				}				
+//				String msg = txtSend.getText();
+//				ip = l.nameIP.get(activeGrp);
+//				if(grpSelected == false) {
+//					System.out.println("no group selected");
+//				}
+//				else {	
+//					txtSend.setText("");
+//					mG.msg(multicastSocket,multicastGroup,ip,activeGrp,userId,msg);					
+//				}				
 			}
 			
 		});
@@ -272,8 +272,8 @@ public class Team6 extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				btnCreateGrp.setVisible(true);
-				txtMgmt.setEnabled(true);
+//				btnCreateGrp.setVisible(true);
+//				txtMgmt.setEnabled(true);
 				
 				
 			}
@@ -286,13 +286,13 @@ public class Team6 extends JFrame {
 				// TODO Auto-generated method stub
 				
 				//Outside Grp Management
-				btnCreateGrp.setVisible(false);
-				String[] options = {"Add User", "Remove User", "Change Group Name"};
-                int popup = JOptionPane.showOptionDialog(null, "Choose an Option: ",
-                        "Group Management - " + activeGrp,
-                        JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-                eO.option(popup,activeGrp,textConvo);
-                
+//				btnCreateGrp.setVisible(false);
+//				String[] options = {"Add User", "Remove User", "Change Group Name"};
+//                int popup = JOptionPane.showOptionDialog(null, "Choose an Option: ",
+//                        "Group Management - " + activeGrp,
+//                        JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+//                eO.option(popup,activeGrp,textConvo);
+//                
 			}
 		});
 		// Leaving group by his own
@@ -302,33 +302,33 @@ public class Team6 extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				
-				if(grpSelected == false) {
-					System.out.println("no group selected");
-				}
-				else {		
-					dG.delete(multicastSocket,multicastGroup,activeGrp,userId);
-					textConvo.append("You have left group \""+ activeGrp+"\"");
-					l.grpList = l.userGrp.get(userId);
-					if(l.grpList != null) {
-						for(String grp : l.grpList) {
-							// newly join
-							if(!checkGrp.containsKey(grp)) {
-								checkGrp.put(grp, "0");
-							}
-							// If leave then added back, update back to 0
-							else if(checkGrp.containsKey(grp) && !l.grpUser.containsValue(userId)) {
-								checkGrp.put(grp, "2");
-							}
-							// Change name
-							else if(!checkGrp.containsKey(grp) && l.grpUser.containsValue(userId)) {
-								checkGrp.put(grp,"3");
-							}
-						}
-						groupList.setListData(l.grpList.toArray((new String[l.grpList.size()])));
-					} else {
-						groupList.setListData(l.grpList.toArray((new String[l.grpList.size()])));
-					}
-				}	
+//				if(grpSelected == false) {
+//					System.out.println("no group selected");
+//				}
+//				else {		
+//					dG.delete(multicastSocket,multicastGroup,activeGrp,userId);
+//					textConvo.append("You have left group \""+ activeGrp+"\"");
+//					l.grpList = l.userGrp.get(userId);
+//					if(l.grpList != null) {
+//						for(String grp : l.grpList) {
+//							// newly join
+//							if(!checkGrp.containsKey(grp)) {
+//								checkGrp.put(grp, "0");
+//							}
+//							// If leave then added back, update back to 0
+//							else if(checkGrp.containsKey(grp) && !l.grpUser.containsValue(userId)) {
+//								checkGrp.put(grp, "2");
+//							}
+//							// Change name
+//							else if(!checkGrp.containsKey(grp) && l.grpUser.containsValue(userId)) {
+//								checkGrp.put(grp,"3");
+//							}
+//						}
+//						groupList.setListData(l.grpList.toArray((new String[l.grpList.size()])));
+//					} else {
+//						groupList.setListData(l.grpList.toArray((new String[l.grpList.size()])));
+//					}
+//				}	
 			}
 			
 		});
@@ -337,41 +337,41 @@ public class Team6 extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				group = txtMgmt.getText();
-				if(!l.nameIP.containsKey(group)) {
-					do {
-						Random r = new Random();
-						x = r.nextInt((255-1) + 1) + 1;
-						y = r.nextInt((255-1) + 1) + 1;
-						ip = "230.1." + Integer.toString(x) + "." + Integer.toString(y);
-						System.out.println("IP Created for " + group +":"+ip);
-					} while(l.nameIP.containsValue(ip));
-					//Need do validation for IP and Address
-					aG.add(multicastSocket,multicastGroup,userId,group, ip, textConvo);
-					txtMgmt.setText("");
-					txtMgmt.setEnabled(false);
-					btnCreateGrp.setVisible(false);
-					
-					l.grpList = l.userGrp.get(userId);
-					if(l.grpList != null) {
-						for(String grp : l.grpList) {
-							if(!checkGrp.containsKey(grp)) {
-								checkGrp.put(grp, "0");
-							}
-							
-						}
-						groupList.setListData(l.grpList.toArray((new String[l.grpList.size()])));
-					}
-					System.out.println("Checkgrp in main"+checkGrp);
-					//Grp Mgmt
-					btnEdit.setEnabled(true);
-					btnDelete.setEnabled(true);
-				} else {
-					textConvo.append("Group Name has been used. Please enter a new Group Name\n");
-				}
-				if(group == "" || group == null) {
-					textConvo.append("Please enter a Group name");
-				}
+//				group = txtMgmt.getText();
+//				if(!l.nameIP.containsKey(group)) {
+//					do {
+//						Random r = new Random();
+//						x = r.nextInt((255-1) + 1) + 1;
+//						y = r.nextInt((255-1) + 1) + 1;
+//						ip = "230.1." + Integer.toString(x) + "." + Integer.toString(y);
+//						System.out.println("IP Created for " + group +":"+ip);
+//					} while(l.nameIP.containsValue(ip));
+//					//Need do validation for IP and Address
+//					aG.add(multicastSocket,multicastGroup,userId,group, ip, textConvo);
+//					txtMgmt.setText("");
+//					txtMgmt.setEnabled(false);
+//					btnCreateGrp.setVisible(false);
+//					
+//					l.grpList = l.userGrp.get(userId);
+//					if(l.grpList != null) {
+//						for(String grp : l.grpList) {
+//							if(!checkGrp.containsKey(grp)) {
+//								checkGrp.put(grp, "0");
+//							}
+//							
+//						}
+//						groupList.setListData(l.grpList.toArray((new String[l.grpList.size()])));
+//					}
+//					System.out.println("Checkgrp in main"+checkGrp);
+//					//Grp Mgmt
+//					btnEdit.setEnabled(true);
+//					btnDelete.setEnabled(true);
+//				} else {
+//					textConvo.append("Group Name has been used. Please enter a new Group Name\n");
+//				}
+//				if(group == "" || group == null) {
+//					textConvo.append("Please enter a Group name");
+//				}
 				
 			}
 		});
@@ -382,34 +382,34 @@ public class Team6 extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				userId = txtRegister.getText();
-				int length = userId.length();
-				if(!l.userList.contains(userId) || length == 0 || userId == "") {
-					
-					char ch = userId.charAt(0);
-					if (length > 8 || Character.isDigit(ch) || userId.contains(" ")) {
-						textConvo.append("User Id must not be more than 8 characters, must not contain any spaces and must not begin with a number\n");
-					} else {
-						
-						txtRegister.setText("");
-						txtRegister.setEnabled(false);
-						btnRegister.setEnabled(false);
-						rU.register(multicastSocket, multicastGroup, userId);
-						
-//						userList.setListData(l.userList.toArray((new String[l.userList.size()])));
-						System.out.println("My User Id is " +userId +"\n");
-						l.grpList = l.userGrp.get(userId);
-						if(l.grpList == null) {
-							List<String> emptylist = new ArrayList<String>();
-							emptylist.add("");
-							Team6.groupList.setListData(emptylist.toArray((new String[emptylist.size()])));
-						}
-						
-					}
-				} else {
-					textConvo.append("Invalid User Id/User Id has been used. Please enter a new User Id\n ");
-				}
-				
+//				userId = txtRegister.getText();
+//				int length = userId.length();
+//				if(!l.userList.contains(userId) || length == 0 || userId == "") {
+//					
+//					char ch = userId.charAt(0);
+//					if (length > 8 || Character.isDigit(ch) || userId.contains(" ")) {
+//						textConvo.append("User Id must not be more than 8 characters, must not contain any spaces and must not begin with a number\n");
+//					} else {
+//						
+//						txtRegister.setText("");
+//						txtRegister.setEnabled(false);
+//						btnRegister.setEnabled(false);
+//						rU.register(multicastSocket, multicastGroup, userId);
+//						
+////						userList.setListData(l.userList.toArray((new String[l.userList.size()])));
+//						System.out.println("My User Id is " +userId +"\n");
+//						l.grpList = l.userGrp.get(userId);
+//						if(l.grpList == null) {
+//							List<String> emptylist = new ArrayList<String>();
+//							emptylist.add("");
+//							Team6.groupList.setListData(emptylist.toArray((new String[emptylist.size()])));
+//						}
+//						
+//					}
+//				} else {
+//					textConvo.append("Invalid User Id/User Id has been used. Please enter a new User Id\n ");
+//				}
+//				
 			}
 			
 		});
@@ -419,76 +419,76 @@ public class Team6 extends JFrame {
 			@Override
 			public void valueChanged(ListSelectionEvent arg0) {
 				// TODO Auto-generated method stub
-				if(groupList.getValueIsAdjusting() == false) {
-					activeGrp = (String) groupList.getSelectedValue();
-					
-					grpSelected = true;
-					// For newly join
-					if(checkGrp.get(activeGrp)== "0") {
-						textConvo.setText("You are in group " + activeGrp + "\n");
-						jG.joinNew(multicastSocket, multicastGroup, userId, activeGrp, textConvo);
-						checkGrp.put(activeGrp, "1");
-					}
-					// For those who have join
-					if(checkGrp.get(activeGrp)== "1"){
-						jG.join(multicastSocket, multicastGroup, activeGrp);
-						List<String> convoList = l.grpConvo.get(activeGrp);
-						
-						if(convoList == null || convoList.size() == 0) {
-							textConvo.setText("You are in group " + activeGrp+"\n");
-						}
-						else {
-//							Collections.reverse(convoList);
-							System.out.println("Length of convo:"+convoList.size());
-							if (convoList.size()>10) {
-								textConvo.setText("");
-								for (int i = 0; i < 10;i++) {
-									textConvo.append(convoList.get(i)+ "\n");
-								}
-							} else {
-								textConvo.setText("");
-								for (int i = 0; i < convoList.size();i++) {
-									textConvo.append(convoList.get(i)+ "\n");
-								}
-							}
-							
-						}
-					}
-					// For those who got kicked/left the group
-					if(checkGrp.get(activeGrp)== "2") {
-						jG.join(multicastSocket, multicastGroup, activeGrp);
-						List<String> convoList = l.grpConvo.get(activeGrp);
-						if(convoList == null || convoList.size() == 0) {
-							textConvo.setText("You are in group " + activeGrp +"\n");
-						}
-						else {
-							//Reverse the list to get from the back
-//							Collections.reverse(convoList);
-							textConvo.setText("");
-							for (int i = 0; i < convoList.size();i++) {
-								textConvo.append(convoList.get(i)+ "\n");
-							}
-							
-						}
-					}
-					// For those that change name
-					if (checkGrp.get(activeGrp) == "3") {
-						jG.join(multicastSocket, multicastGroup, activeGrp);
-						List<String> convoList = l.grpConvo.get(activeGrp);
-						if(convoList == null || convoList.size() == 0) {
-							textConvo.setText("You are in group " + activeGrp+"\n");
-						}
-						else {
-							//Reverse the list to get from the back
-//							Collections.reverse(convoList);
-							textConvo.setText("");
-							for (int i = 0; i < convoList.size()-1;i++) {
-								textConvo.append(convoList.get(i)+ "\n");
-							}
-						}
-					}
-					System.out.println(activeGrp +"selected");
-				}
+//				if(groupList.getValueIsAdjusting() == false) {
+//					activeGrp = (String) groupList.getSelectedValue();
+//					
+//					grpSelected = true;
+//					// For newly join
+//					if(checkGrp.get(activeGrp)== "0") {
+//						textConvo.setText("You are in group " + activeGrp + "\n");
+//						jG.joinNew(multicastSocket, multicastGroup, userId, activeGrp, textConvo);
+//						checkGrp.put(activeGrp, "1");
+//					}
+//					// For those who have join
+//					if(checkGrp.get(activeGrp)== "1"){
+//						jG.join(multicastSocket, multicastGroup, activeGrp);
+//						List<String> convoList = l.grpConvo.get(activeGrp);
+//						
+//						if(convoList == null || convoList.size() == 0) {
+//							textConvo.setText("You are in group " + activeGrp+"\n");
+//						}
+//						else {
+////							Collections.reverse(convoList);
+//							System.out.println("Length of convo:"+convoList.size());
+//							if (convoList.size()>10) {
+//								textConvo.setText("");
+//								for (int i = 0; i < 10;i++) {
+//									textConvo.append(convoList.get(i)+ "\n");
+//								}
+//							} else {
+//								textConvo.setText("");
+//								for (int i = 0; i < convoList.size();i++) {
+//									textConvo.append(convoList.get(i)+ "\n");
+//								}
+//							}
+//							
+//						}
+//					}
+//					// For those who got kicked/left the group
+//					if(checkGrp.get(activeGrp)== "2") {
+//						jG.join(multicastSocket, multicastGroup, activeGrp);
+//						List<String> convoList = l.grpConvo.get(activeGrp);
+//						if(convoList == null || convoList.size() == 0) {
+//							textConvo.setText("You are in group " + activeGrp +"\n");
+//						}
+//						else {
+//							//Reverse the list to get from the back
+////							Collections.reverse(convoList);
+//							textConvo.setText("");
+//							for (int i = 0; i < convoList.size();i++) {
+//								textConvo.append(convoList.get(i)+ "\n");
+//							}
+//							
+//						}
+//					}
+//					// For those that change name
+//					if (checkGrp.get(activeGrp) == "3") {
+//						jG.join(multicastSocket, multicastGroup, activeGrp);
+//						List<String> convoList = l.grpConvo.get(activeGrp);
+//						if(convoList == null || convoList.size() == 0) {
+//							textConvo.setText("You are in group " + activeGrp+"\n");
+//						}
+//						else {
+//							//Reverse the list to get from the back
+////							Collections.reverse(convoList);
+//							textConvo.setText("");
+//							for (int i = 0; i < convoList.size()-1;i++) {
+//								textConvo.append(convoList.get(i)+ "\n");
+//							}
+//						}
+//					}
+//					System.out.println(activeGrp +"selected");
+//				}
 			}
 			
 		});
@@ -497,10 +497,10 @@ public class Team6 extends JFrame {
 			@Override
 			public void valueChanged(ListSelectionEvent arg0) {
 				// TODO Auto-generated method stub
-				if(userList.getValueIsAdjusting() == false) {
-					activeUsr = (String) userList.getSelectedValue();
-					pO.changeProf(activeUsr, userId);
-				}
+//				if(userList.getValueIsAdjusting() == false) {
+//					activeUsr = (String) userList.getSelectedValue();
+//					pO.changeProf(activeUsr, userId);
+//				}
 			}
 			
 		});

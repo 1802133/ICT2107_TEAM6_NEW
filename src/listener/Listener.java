@@ -47,6 +47,7 @@ public class Listener {
 	protected String[] tempList;
 	// Well known Address
 	public static final String IP = "230.1.1.1";
+	public static final int portNo = 6789;
 		
 	public Listener(MulticastSocket mcs,InetAddress msg,String user){
 		multicastSocket = mcs;
@@ -57,13 +58,13 @@ public class Listener {
 	public String start(JTextArea textConvo) {
 		try {
 			multicastGroup = InetAddress.getByName(IP);
-			multicastSocket = new MulticastSocket(6789);
+			multicastSocket = new MulticastSocket(port);
 			//Join
 			multicastSocket.joinGroup(multicastGroup);
 			//Send a joined message
 			String message = username + " have joined";
 			byte[] buf = message.getBytes();
-			DatagramPacket dgpConnected = new DatagramPacket(buf,buf.length, multicastGroup,6789);
+			DatagramPacket dgpConnected = new DatagramPacket(buf,buf.length, multicastGroup,portNo);
 			multicastSocket.send(dgpConnected);
 			//Create a new thread to keep listening for packets from the group
 			new Thread(new Runnable() {
@@ -181,76 +182,76 @@ public class Listener {
 	}
 	protected void addHashGrp(String type, String[] grp, JTextArea textConvo) {
 		//Create new group and automatically join
-		if(type.equals("GRP:")) {
-			//Getting list from username
-			List<String> tempgrpList = userGrp.get(grp[2]);
-			// Adding username with his respective groups that he is in
-			if(tempgrpList == null) {
-				tempgrpList = new ArrayList<String>();
-				tempgrpList.add(grp[0]);
-				userGrp.put(grp[2],tempgrpList);
-			} else {
-				tempgrpList.add(grp[0]);
-			}
-		}
-		//Add new User
-		if(type.equals("ADU:")) {
-			List<String> groupList = userGrp.get(grp[1]);
-			if(groupList == null) {
-				groupList = new ArrayList<String>();
-				groupList.add(grp[0]);
-				userGrp.put(grp[1],groupList);
-			} else {
-				groupList.add(grp[0]);
-			}
-			// Refresh JList groups
-			grpList = userGrp.get(grp[1]);
-			if(grpList != null) {
-				Team6.groupList.setListData(grpList.toArray((new String[grpList.size()])));
-			}
-//			textConvo.append(grp[1] + " has been added to group "+ grp[0]);
-		}
+//		if(type.equals("GRP:")) {
+//			//Getting list from username
+//			List<String> tempgrpList = userGrp.get(grp[2]);
+//			// Adding username with his respective groups that he is in
+//			if(tempgrpList == null) {
+//				tempgrpList = new ArrayList<String>();
+//				tempgrpList.add(grp[0]);
+//				userGrp.put(grp[2],tempgrpList);
+//			} else {
+//				tempgrpList.add(grp[0]);
+//			}
+//		}
+//		//Add new User
+//		if(type.equals("ADU:")) {
+//			List<String> groupList = userGrp.get(grp[1]);
+//			if(groupList == null) {
+//				groupList = new ArrayList<String>();
+//				groupList.add(grp[0]);
+//				userGrp.put(grp[1],groupList);
+//			} else {
+//				groupList.add(grp[0]);
+//			}
+//			// Refresh JList groups
+//			grpList = userGrp.get(grp[1]);
+//			if(grpList != null) {
+//				Team6.groupList.setListData(grpList.toArray((new String[grpList.size()])));
+//			}
+////			textConvo.append(grp[1] + " has been added to group "+ grp[0]);
+//		}
 		
 		
 	}
 	protected void addHashUsr(String type, String[] usr) {
-		if(type.equals("GRP:")) {
-			// Getting userlist from groups
-			List<String> usrList = grpUser.get(usr[0]);
-			// Adding grps with list of users in it
-			if(usrList == null) {
-				usrList = new ArrayList<String>();
-				usrList.add(usr[2]);
-				grpUser.put(usr[0], usrList);
-			} else {
-				if(!usrList.contains(usr[2])) {
-					usrList.add(usr[2]);
-				}
-				
-			}
-		}
-		if(type.equals("ADU:")) {
-			// Getting userlist from groups
-			List<String> usrList = grpUser.get(usr[0]);
-			// Adding grps with list of users in it
-			if(usrList == null) {
-				usrList = new ArrayList<String>();
-				usrList.add(usr[1]);
-				grpUser.put(usr[0], usrList);
-			} else {
-				usrList.add(usr[1]);
-			}
-		}
+//		if(type.equals("GRP:")) {
+//			// Getting userlist from groups
+//			List<String> usrList = grpUser.get(usr[0]);
+//			// Adding grps with list of users in it
+//			if(usrList == null) {
+//				usrList = new ArrayList<String>();
+//				usrList.add(usr[2]);
+//				grpUser.put(usr[0], usrList);
+//			} else {
+//				if(!usrList.contains(usr[2])) {
+//					usrList.add(usr[2]);
+//				}
+//				
+//			}
+//		}
+//		if(type.equals("ADU:")) {
+//			// Getting userlist from groups
+//			List<String> usrList = grpUser.get(usr[0]);
+//			// Adding grps with list of users in it
+//			if(usrList == null) {
+//				usrList = new ArrayList<String>();
+//				usrList.add(usr[1]);
+//				grpUser.put(usr[0], usrList);
+//			} else {
+//				usrList.add(usr[1]);
+//			}
+//		}
 		
 	}
 	protected void removeUsr(String grp, String user) {
-		//Remove user from userList based on group key
-		List<String> usrList = grpUser.get(grp);
-		usrList.remove(user);
-		
-		//Remove group from groupList based on user key
-		List<String> grpList = userGrp.get(user);
-		grpList.remove(grp);
+//		//Remove user from userList based on group key
+//		List<String> usrList = grpUser.get(grp);
+//		usrList.remove(user);
+//		
+//		//Remove group from groupList based on user key
+//		List<String> grpList = userGrp.get(user);
+//		grpList.remove(grp);
 	}
 	protected void changeGrp(String newname, String oldname) {
 		// TODO Auto-generated method stub
@@ -258,90 +259,90 @@ public class Listener {
 		 *  Remove keyvalue pair for old
 		 *  Put keyvalue pair for new but with same ip
 		 */
-		String ip = nameIP.get(oldname);
-		nameIP.remove(oldname);
-		nameIP.put(newname, ip);
-		/*
-		 * Remove keyvalue pair for old
-		 * Put keyvalue pair for new but with same usrList
-		 */
-		
-		List<String> usrList = grpUser.get(oldname);
-		grpUser.remove(oldname);
-		grpUser.put(newname,usrList);
-		
-		/*
-		 * Replace grpname for all users that belong to the group
-		 */
-		for(String user : usrList) {
-			List<String> grpList = userGrp.get(user);
-			int index = grpList.indexOf(oldname);
-			grpList.set(index, newname);
-		}
-		/*
-		 * Put all existing convos into new
-		 */
-		List<String> convoList = grpConvo.get(oldname);
-		grpConvo.remove(oldname);
-		grpConvo.put(newname,convoList);
-		
+//		String ip = nameIP.get(oldname);
+//		nameIP.remove(oldname);
+//		nameIP.put(newname, ip);
+//		/*
+//		 * Remove keyvalue pair for old
+//		 * Put keyvalue pair for new but with same usrList
+//		 */
+//		
+//		List<String> usrList = grpUser.get(oldname);
+//		grpUser.remove(oldname);
+//		grpUser.put(newname,usrList);
+//		
+//		/*
+//		 * Replace grpname for all users that belong to the group
+//		 */
+//		for(String user : usrList) {
+//			List<String> grpList = userGrp.get(user);
+//			int index = grpList.indexOf(oldname);
+//			grpList.set(index, newname);
+//		}
+//		/*
+//		 * Put all existing convos into new
+//		 */
+//		List<String> convoList = grpConvo.get(oldname);
+//		grpConvo.remove(oldname);
+//		grpConvo.put(newname,convoList);
+
 		
 	}
 	public static void remHashGrp(String[] grp) {		
-		//Remove user from userList based on group key
-		List<String> usrList = grpUser.get(grp[1]);
-		usrList.remove(grp[0]);
-		
-		//Remove group from groupList based on user key
-		List<String> grpList = userGrp.get(grp[0]);
-		grpList.remove(grp[1]);
+//		//Remove user from userList based on group key
+//		List<String> usrList = grpUser.get(grp[1]);
+//		usrList.remove(grp[0]);
+//		
+//		//Remove group from groupList based on user key
+//		List<String> grpList = userGrp.get(grp[0]);
+//		grpList.remove(grp[1]);
 	}
 	
 	public void msgGrp(String[] msgSend) {
-		List<String> txtConvo = grpConvo.get(msgSend[0]);
-		// Adding grps with concat msg
-		if(txtConvo == null) {
-			txtConvo = new ArrayList<String>();
-			txtConvo.add(msgSend[1]);
-			grpConvo.put(msgSend[0], txtConvo);
-		} else {
-			txtConvo.add(msgSend[1]);
-		}
+//		List<String> txtConvo = grpConvo.get(msgSend[0]);
+//		// Adding grps with concat msg
+//		if(txtConvo == null) {
+//			txtConvo = new ArrayList<String>();
+//			txtConvo.add(msgSend[1]);
+//			grpConvo.put(msgSend[0], txtConvo);
+//		} else {
+//			txtConvo.add(msgSend[1]);
+//		}
 	}
 	protected void changeProf(String[] profile) {
-		List<String> imgBio = userProf.get(profile[0]);
-		if(imgBio == null) {
-			imgBio = new ArrayList<String>();
-			imgBio.add(profile[1]);
-			imgBio.add(profile[2]);
-			userProf.put(profile[0], imgBio);
-		} else {
-			imgBio.add(profile[1]);
-			imgBio.add(profile[2]);
-		}
+//		List<String> imgBio = userProf.get(profile[0]);
+//		if(imgBio == null) {
+//			imgBio = new ArrayList<String>();
+//			imgBio.add(profile[1]);
+//			imgBio.add(profile[2]);
+//			userProf.put(profile[0], imgBio);
+//		} else {
+//			imgBio.add(profile[1]);
+//			imgBio.add(profile[2]);
+//		}
 	}
 	protected void groupSettings() {
-		
-		grpList = userGrp.get(Team6.userId);
-		// These is for new users ina  group
-		if(grpList != null) {
-			for(String grp : grpList) {
-				
-				if(!Team6.checkGrp.containsKey(grp)) {
-					Team6.checkGrp.put(grp,"0");
-				}
-//				if(!Team6.checkGrp.containsKey(grp) && templist.contains(Team6.userId)) {
-//					Team6.checkGrp.put(grp,"3");
+//		
+//		grpList = userGrp.get(Team6.userId);
+//		// These is for new users ina  group
+//		if(grpList != null) {
+//			for(String grp : grpList) {
+//				
+//				if(!Team6.checkGrp.containsKey(grp)) {
+//					Team6.checkGrp.put(grp,"0");
 //				}
-//				// If leave then added back/remove from group, update back to 0
-//				else if(Team6.checkGrp.containsKey(grp) && !templist.contains(Team6.userId)) {
-//					Team6.checkGrp.put(grp,"2");
-//				}
-				
-			}
-		}
-		Team6.groupList.setListData(grpList.toArray((new String[grpList.size()])));
-	}
+////				if(!Team6.checkGrp.containsKey(grp) && templist.contains(Team6.userId)) {
+////					Team6.checkGrp.put(grp,"3");
+////				}
+////				// If leave then added back/remove from group, update back to 0
+////				else if(Team6.checkGrp.containsKey(grp) && !templist.contains(Team6.userId)) {
+////					Team6.checkGrp.put(grp,"2");
+////				}
+//				
+//			}
+//		}
+//		Team6.groupList.setListData(grpList.toArray((new String[grpList.size()])));
+//	}
 	
 	
 }
