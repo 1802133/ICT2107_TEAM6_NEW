@@ -71,9 +71,11 @@ private static final String fileName = "userStorage";
 	
 	private static JSONObject JsonWriter(String objectName, HashMap<String, String> hashMap) {
 		JSONObject obj = new JSONObject();
+		JSONObject subObj = new JSONObject();
 		for (Map.Entry entries: hashMap.entrySet()) {
-			obj.put(entries.getKey(), entries.getValue());
+			subObj.put(entries.getKey(), entries.getValue());
 		}
+		obj.put(objectName, subObj);
 		return obj;
 	}
 	
@@ -137,16 +139,19 @@ private static final String fileName = "userStorage";
 		return null;
 	}
 	
-	private static HashMap<String, String> getHash(String grpName, JSONObject array){
+	private static HashMap<String, HashMap<String, String>> getHash(String grpName, JSONObject array){
 		JSONObject jsonObject = new JSONObject();
-		HashMap<String, String> hashMap = new HashMap<String, String>();
+		HashMap<String, HashMap<String, String>> hashMap = new HashMap<String, HashMap<String, String>>();
 		if (array.get(grpName) != null){
 			jsonObject = (JSONObject) array.get(grpName);
+			HashMap<String, String> subHash = new HashMap<String, String>();
 			for (Iterator iterator = jsonObject.keySet().iterator(); iterator.hasNext();) {
 				String key = (String) iterator.next();
-				hashMap.put(key, (String) jsonObject.get(key));
+				subHash.put(key, (String) jsonObject.get(key));
 			}
+			hashMap.put(grpName, subHash);
+			return hashMap;
 		}
-		return hashMap;
+		return null;
 	}
 }

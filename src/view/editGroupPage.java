@@ -1,30 +1,32 @@
-package controller;
+package view;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.lang.management.ManagementFactory;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import controller.addGroup;
+import controller.joinGroup;
 import listener.Listener;
 
-public class editOption {
+public class editGroupPage {
 	JFrame temp;
 	JPanel panelTemp;
 	JButton btnTemp;
@@ -36,7 +38,7 @@ public class editOption {
 	joinGroup jG = new joinGroup();
 	MulticastSocket multicastSocket = null;
 	InetAddress multicastGroup = null;
-	public editOption() {
+	public editGroupPage() {
 		
 		
 	}
